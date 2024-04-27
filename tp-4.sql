@@ -53,3 +53,21 @@ SELECT *
 FROM BON b  
 WHERE DATE_CMDE  BETWEEN '2019-02-01' AND '2019-04-30';
 
+--- Sélectionnez les bons de commandes sans article (indice : utilisation de EXISTS)
+SELECT *
+FROM BON b
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM COMPO c
+    WHERE c.ID_BON = b.ID
+);
+
+SELECT *
+FROM BON
+WHERE NOT EXISTS (
+    SELECT *
+    FROM COMPO
+    WHERE COMPO.ID_BON = BON.ID
+);
+SELECT * from COMPO c ;
+SELECT * from BON b 
